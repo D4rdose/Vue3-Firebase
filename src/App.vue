@@ -73,7 +73,8 @@
 </script>
 
 <template>
-  <div class="search-container">
+  <div class="container">
+    <div class="search-container">
     <input v-model="newTodo" id="userInput" class="search-bar" type="text" placeholder="Add a todo">
     <button :disabled="!newTodo" @click="add" class="add">Add</button>
   </div>
@@ -90,10 +91,16 @@
       </div>
     </div>
   </div>
-  
+  </div>
 </template>
 
 <style scoped>
+.container {
+  margin: 0 auto;
+  background-color: rgb(36, 34, 34);
+  width: 100vw;
+  height: 100vh;
+}
   .search-container {
     max-width: 450px;
     padding: 20px;
