@@ -2,7 +2,11 @@
   import {ref} from 'vue';
 
   const newTodo = ref('');
-  const id = ref(0);
+  const id = ref(-1);
+
+  const todos = ref([
+    
+    ])
 
   const add = () => {
     id.value += 1;
@@ -13,17 +17,15 @@
     }
     console.log(addTodo.id);
     todos.value.push(addTodo);
+    console.log(todos[id.value])
     newTodo.value = '';
   }
 
   const deleteTodo = id => {
-    console.log(addTodo.id);
+    todos.value = todos.value.filter(todo => todo.id !== id);
   }
 
   
-  const todos = ref([
-    
-  ])
   
   
 </script>
@@ -40,8 +42,8 @@
           <p id="content">{{ todo.content }}</p>
         </div>
         <div class="editor">
-          <button class="btn edit"> Edit</button>
-          <button @click="deleteTodo(addTodo.id)" class="btn delete">Delete</button>
+          <button class="btn done">Done</button>
+          <button @click="deleteTodo(todo.id)" :id = "todo.id" class="btn delete">Delete</button>
         </div>
       </div>
     </div>
@@ -107,7 +109,7 @@
     border-radius: 5px;
   }
 
-  .edit {
+  .done {
     background-color: skyblue;
     color: black;
     font-weight: bolder;
