@@ -1,40 +1,72 @@
 <script setup>
-  import {ref} from 'vue';
+  import {ref, onMounted} from 'vue';
+  import { collection, onSnapshot, addDoc, deleteDoc, doc, updateDoc, query, orderBy} from 'firebase/firestore'
+  import {db} from '@/firebase'
+
+  const fbCollectionRef = collection(db, 'todos');
+  const todosCollectionQuery = query(fbCollectionRef, orderBy('date', 'desc'));
 
   const newTodo = ref('');
-  const id = ref(0);
 
   const todos = ref([
-    // {
-    //   id: id.value,
-    //   content: 'hello',
-    //   done: false
-    // },
-    // {
-    //   id: id.value,
-    //   content: 'hi',
-    //   done: true
-    // }
+
     ])
 
+  onMounted(async () => {
+    // const querySnapshot = await getDocs(collection(db, 'todos'));
+    // let fbTodos = []
+    // querySnapshot.forEach((doc) => {
+    //   console.log(doc.id, " => ", doc.data());
+    //   const todo = {
+    //     id: doc.id,
+    //     content: doc.data().content,
+    //     done: doc.data().done
+    //   }
+    //   fbTodos.push(todo)
+    // });
+    // todos.value = fbTodos;
+
+    onSnapshot(todosCollectionQuery, (querySnapshot) => {
+      const fbTodos = [];
+      querySnapshot.forEach((doc) => {
+          const todo = {
+            id: doc.id,
+            content: doc.data().content,
+            done: doc.data().done
+          }
+          fbTodos.push(todo)
+      });
+     todos.value = fbTodos
+    });
+  })
+
   const add = () => {
-    id.value += 1;
-    const addTodo = {
-      id: id.value,
-      content: newTodo.value,
-      done: false
-    }
-    todos.value.push(addTodo);
+    // id.value += 1;
+    // const addTodo = {
+    //   id: id.value,
+    //   content: newTodo.value,
+    //   done: false
+    // }
+    // todos.value.push(addTodo);
+
+    addDoc(fbCollectionRef, {
+    content: newTodo.value,
+    done: false,
+    date: Date.now()
+  });
     newTodo.value = '';
   }
 
   const deleteTodo = id => {
-    todos.value = todos.value.filter(todo => todo.id !== id);
+    deleteDoc(doc(fbCollectionRef, id))
   }
 
   const done = id => {
     const index = todos.value.findIndex(todo => todo.id === id);
-    todos.value[index].done = !todos.value[index].done;
+
+    updateDoc(doc(fbCollectionRef, id), {
+      done: !todos.value[index].done
+    })
   }
   
   
