@@ -2,10 +2,19 @@
   import {ref} from 'vue';
 
   const newTodo = ref('');
-  const id = ref(-1);
+  const id = ref(0);
 
   const todos = ref([
-    
+    // {
+    //   id: id.value,
+    //   content: 'hello',
+    //   done: false
+    // },
+    // {
+    //   id: id.value,
+    //   content: 'hi',
+    //   done: true
+    // }
     ])
 
   const add = () => {
@@ -15,9 +24,7 @@
       content: newTodo.value,
       done: false
     }
-    console.log(addTodo.id);
     todos.value.push(addTodo);
-    console.log(todos[id.value])
     newTodo.value = '';
   }
 
@@ -25,7 +32,10 @@
     todos.value = todos.value.filter(todo => todo.id !== id);
   }
 
-  
+  const done = id => {
+    const index = todos.value.findIndex(todo => todo.id === id);
+    todos.value[index].done = !todos.value[index].done;
+  }
   
   
 </script>
@@ -37,13 +47,13 @@
   </div>
   <div class="content">
     <div class="todo-list">
-      <div v-for="todo in todos" class="item">
+      <div v-for="todo in todos" :class="todo.done ? 'completed' : 'item'">
         <div class="todo-info">
           <p id="content">{{ todo.content }}</p>
         </div>
         <div class="editor">
-          <button class="btn done">Done</button>
-          <button @click="deleteTodo(todo.id)" :id = "todo.id" class="btn delete">Delete</button>
+          <button  :class="todo.done ? 'btn-completed' : 'not-completed'" @click="done(todo.id)" class="btn">Done</button>
+          <button @click="deleteTodo(todo.id)" :id="todo.id" class="btn delete">Delete</button>
         </div>
       </div>
     </div>
@@ -126,5 +136,29 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .completed {
+    width: 450px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: lightgreen;;
+    text-decoration: line-through;
+    color: green;
+    font-weight: bolder;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .btn-completed {
+    background-color: rgb(20, 211, 20);
+    color: white;
+  }
+
+  .not-completed {
+    background-color: skyblue;
+    color: black;
   }
 </style>
