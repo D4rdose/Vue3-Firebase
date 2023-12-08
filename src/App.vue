@@ -1,36 +1,47 @@
 <script setup>
   import {ref} from 'vue';
-  const userInput = ref('')
+
+  const newTodo = ref('');
+  const id = ref(0);
+
   const add = () => {
-  const content = document.getElementById("content");
-  content.innerHTML = userInput.value;
+    id.value += 1;
+    const addTodo = {
+      id: id.value,
+      content: newTodo.value,
+      done: false
+    }
+    console.log(addTodo.id);
+    todos.value.push(addTodo);
+    newTodo.value = '';
   }
+
+  const deleteTodo = id => {
+    console.log(addTodo.id);
+  }
+
+  
+  const todos = ref([
+    
+  ])
+  
   
 </script>
 
 <template>
   <div class="search-container">
-    <input v-model="userInput" id="userInput" class="search-bar" type="text" placeholder="Add a todo">
-    <button @click="add" class="add">Add</button>
+    <input v-model="newTodo" id="userInput" class="search-bar" type="text" placeholder="Add a todo">
+    <button :disabled="!newTodo" @click="add" class="add">Add</button>
   </div>
   <div class="content">
     <div class="todo-list">
-      <div class="item">
+      <div v-for="todo in todos" class="item">
         <div class="todo-info">
-          <p id="content">Hello World</p>
+          <p id="content">{{ todo.content }}</p>
         </div>
         <div class="editor">
           <button class="btn edit"> Edit</button>
-          <button class="btn delete">Delete</button>
-        </div>
-      </div>
-      <div class="item">
-        <div class="todo-info">
-          <p>Hello World</p>
-        </div>
-        <div class="editor">
-          <button class="btn edit"> Edit</button>
-          <button class="btn delete">Delete</button>
+          <button @click="deleteTodo(addTodo.id)" class="btn delete">Delete</button>
         </div>
       </div>
     </div>
@@ -61,6 +72,7 @@
     background-color: skyblue;
     color: white;
     font-weight: bolder;
+    cursor: pointer;
   }
 
   .content {
@@ -99,12 +111,14 @@
     background-color: skyblue;
     color: black;
     font-weight: bolder;
+    cursor: pointer;
   }
 
   .delete {
     color: white;
     background-color: red;
     font-weight: bolder;
+    cursor: pointer;
   }
   .todo-info {
     display: flex;
