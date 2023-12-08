@@ -187,10 +187,12 @@
   .btn-completed {
     background-color: rgb(20, 211, 20);
     color: white;
+    cursor: pointer;
   }
 
   .not-completed {
     background-color: skyblue;
     color: black;
+    cursor: pointer;
   }
 </style>
