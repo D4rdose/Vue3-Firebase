@@ -34,15 +34,19 @@ const register = () => {
                 <input type="password" name="password" class="user-input" v-model="password">
             </div>
         </div>
-        <div class="login flex">
+        <div class="register flex">
             <!-- <button @click="router.push('/login')" class="login-btn btn">Register</button> -->
             <button @click="register()" class="login-btn btn">Register</button>
+        </div>
+        <div class="login flex">
+            <button @click="router.push('/login')" class="register-btn btn">Login Instead</button>
         </div>
     </div>
 </template>
 
 <style scoped>
 .container {
+    margin-top: 10%;
     width: 500px;
     height: 450px;
     padding: 30px;
@@ -53,10 +57,10 @@ const register = () => {
 .login-btn {
  width: 300px;
  color: white;
- background-color: rgb(69, 141, 209);
+ background-color: yellowgreen;
 }
 
-.login {
+.register {
     flex-wrap: wrap;
     margin: 30px 0;
     padding-bottom: 30px;
@@ -72,7 +76,7 @@ const register = () => {
 .register-btn {
     width: 200px;
     color: white;
-    background-color: yellowgreen;
+    background-color: rgb(69, 141, 209);
 }
 
 

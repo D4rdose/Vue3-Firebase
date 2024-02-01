@@ -50,6 +50,7 @@ const Login = () => {
 
 <style scoped>
 .container {
+    margin-top: 10%;
     width: 500px;
     height: 450px;
     padding: 30px;
