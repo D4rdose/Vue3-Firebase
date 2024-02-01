@@ -121,7 +121,7 @@
 <style scoped>
 .container {
   margin: 0 auto;
-  background-color: rgb(36, 34, 34);
+  background-color: white;
   width: 100vw;
   height: 100vh;
 }
@@ -137,6 +137,7 @@
     border: none;
     border-radius: 5px;
     padding-left: 10px; 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
   
   .add {
@@ -148,6 +149,7 @@
     color: white;
     font-weight: bolder;
     cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 
   .content {
@@ -172,6 +174,7 @@
     margin: 10px;
     border-radius: 10px;
     padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 
   .btn {
@@ -184,7 +187,7 @@
 
   .done {
     background-color: skyblue;
-    color: black;
+    color: white;
     font-weight: bolder;
     cursor: pointer;
   }
@@ -213,6 +216,7 @@
     margin: 10px;
     border-radius: 10px;
     padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 
   .btn-completed {
@@ -223,7 +227,7 @@
 
   .not-completed {
     background-color: skyblue;
-    color: black;
+    color: white;
     cursor: pointer;
   }
 
@@ -238,5 +242,6 @@
     border-radius: 5px;
     border: none;
     cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 </style>
